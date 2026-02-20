@@ -6,11 +6,11 @@ pkill -f "uvicorn" || true
 lsof -ti :8000 | xargs kill -9 2>/dev/null || true
 
 # 2. Activate Virtual Environment
-if [ -d "faceenv" ]; then
-    echo "Activating faceenv..."
-    source faceenv/bin/activate
+if [ -d "venv" ]; then
+    echo "Activating venv..."
+    source venv/bin/activate
 else
-    echo "CRITICAL ERROR: 'faceenv' directory not found."
+    echo "CRITICAL ERROR: 'venv' directory not found."
     echo "Please ensure you are in the project root."
     exit 1
 fi
@@ -18,7 +18,7 @@ fi
 # 3. Verify Dependencies
 echo "Verifying dlib installation..."
 python3 -c "import dlib; import face_recognition; print('Dependencies OK')" || {
-    echo "ERROR: dlib or face_recognition missing in faceenv!"
+    echo "ERROR: dlib or face_recognition missing in venv!"
     exit 1
 }
 
